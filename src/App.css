@@ -1,0 +1,32 @@
+.todoBody {
+  width: 480px;
+  max-height: 640px;
+  margin: 0 auto;
+  margin-top: 3%;
+  border: 3px solid #513e5c;
+  border-radius: 10px;
+  background-color: #b8e3ea;
+  color: #02334a;
+  text-align: center;
+  padding: 20px;
+}
+
+button {
+  background-color: #c7aabc;
+  border: 2px solid #513e5c;
+  border-radius: 5px;
+  padding: 10px;
+}
+button:active {
+  background-color: #a9bcc6;
+}
+.todoDo {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  border: 3px solid #513e5c;
+  border-radius: 10px;
+  padding: 5px 20px 5px 20px;
+  margin: 5px 0 5px 0;
+}
