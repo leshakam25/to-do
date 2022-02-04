@@ -1,32 +1,30 @@
 import TodoDo from "./todoDo";
-import React from "react";
+import React, { useState } from "react";
 import { sendListCreator, updateListBodyCreator } from "./store";
 
 function Todo(props) {
-  let listElements = props.listData.map((p) => (
-    <TodoDo id={p.id} message={p.message} />
-  ));
+  const [inputText, setInputText] = useState("");
 
-  let newListElement = React.createRef();
-
-  let onSendList = () => {
-    sendList();
+  const [listElements, setListElements] = useState([
+    "Пропылесосить",
+    "Посуда",
+    "Кушкуш",
+  ]);
+  const handleAddTask = () => {
+    if (inputText.length === 0) alert("Введена пустая строка");
+    else {
+      setListElements([...listElements, inputText]);
+      setInputText("");
+    }
   };
-
-  let onListChange = () => {
-    let message = newListElement.current.value;
-    updateListBody(message);
+  const handleDeleteTask = (id) => {
+    let array = [...listElements];
+    array.splice(id);
+    setListElements([...array]);
   };
-
-  let sendList = () => {
-    props.store.listcase(sendListCreator());
+  const handleChangeInput = (event) => {
+    setInputText(event.target.value);
   };
-
-  let updateListBody = (text) => {
-    let action = updateListBodyCreator(text);
-    props.store.dispatch(action);
-  };
-
   return (
     <div className="todoBody">
       <div>
@@ -35,16 +33,22 @@ function Todo(props) {
       <div className="list">
         <div>
           <textarea
-            onChange={onListChange}
-            ref={newListElement}
-            value={props.list}
+            onChange={handleChangeInput}
+            // ref={newListElement}
+            value={inputText}
           />
         </div>
         <div>
           <p>Списочек задач:</p>
         </div>
-        {listElements}
-        <button onClick={onSendList}>Добавить</button>
+        {listElements.map((task, index) => (
+          <TodoDo
+            id={index}
+            message={task}
+            handleDeleteTask={handleDeleteTask}
+          />
+        ))}
+        <button onClick={handleAddTask}>Добавить</button>
       </div>
     </div>
   );

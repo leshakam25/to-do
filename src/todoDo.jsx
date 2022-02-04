@@ -1,9 +1,9 @@
-function TodoDo(props) {
+function TodoDo({ id, message, handleDeleteTask }) {
   return (
     <div className="todoDo">
-      <div>{props.id + " " + props.message + " "}</div>
+      <div>{id + " " + message + " "}</div>
       <div>
-        <button>X</button>
+        <button onClick={() => handleDeleteTask(id)}>X</button>
       </div>
     </div>
   );
